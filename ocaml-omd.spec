@@ -1,24 +1,24 @@
 Name:           ocaml-omd
 Version:        1.3.2
 Release:        %autorelease
-Summary:        extensible Markdown library and tool in "pure OCaml"
+Summary:        Extensible Markdown library and tool in "pure OCaml"
 
 License:        ISC
 URL:            https://github.com/ocaml/omd
 Source0:        https://github.com/ocaml/omd/archive/%{version}/omd-%{version}.tar.gz
 
+# OCaml packages not built on i686 since OCaml 5 / Fedora 39.
+ExcludeArch:    %{ix86}
+
 BuildRequires:  coq
-BuildRequires:  ocaml >= 4.08.1
+BuildRequires:  ocaml >= 4.04
 BuildRequires:  ocaml-dune >= 2.7
-BuildRequires:  ocaml-uutf-devel
-BuildRequires:  ocaml-uucp-devel
-BuildRequires:  ocaml-uunf-devel
-BuildRequires:  ocaml-dune-build-info-devel
-BuildRequires:  ocaml-ppx-expect-devel
-BuildRequires:  ocaml-time-now-devel
 
 %description
-Omd is an OCaml library designed to parse, manipulate, and print Markdown into different formats. In addition to the library, a command-line tool omd is included to easily convert markdown into HTML.
+Omd is an OCaml library designed to
+parse, manipulate, and print Markdown into different formats.
+In addition to the library, a command-line tool omd is included to
+easily convert markdown into HTML.
 
 %package        devel
 Summary:        Development files for %{name}
