@@ -10,15 +10,15 @@ Source0:        https://github.com/ocaml/omd/archive/%{version}/omd-%{version}.t
 # OCaml packages not built on i686 since OCaml 5 / Fedora 39.
 ExcludeArch:    %{ix86}
 
-BuildRequires:  coq
+BuildRequires:  help2man
 BuildRequires:  ocaml >= 4.04
 BuildRequires:  ocaml-dune >= 2.7
+BuildRequires:  ocaml-findlib
 
 %description
-Omd is an OCaml library designed to
-parse, manipulate, and print Markdown into different formats.
-In addition to the library, a command-line tool omd is included to
-easily convert markdown into HTML.
+Omd is an OCaml library designed to parse, manipulate, and print
+Markdown into different formats.  In addition to the library, a
+command-line tool omd is included to easily convert markdown into HTML.
 
 %package        devel
 Summary:        Development files for %{name}
@@ -37,11 +37,16 @@ developing applications that use %{name}.
 %install
 %dune_install
 
+mkdir -p %{buildroot}%{_mandir}/man1
+help2man -N --version-string=%{version} -o %{buildroot}%{_mandir}/man1/omd.1 \
+  -n 'Convert markdown to HTML' %{buildroot}%{_bindir}/omd
+
 %check
 %dune_check
 
 %files -f .ofiles
 %doc README.md CHANGES.md
+%{_mandir}/man1/omd.1*
 
 %files devel -f .ofiles-devel
 
